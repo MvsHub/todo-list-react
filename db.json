@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": "096c",
+      "name": "task1",
+      "completed": false,
+      "completedAt": null
+    },
+    {
+      "id": "c2b7",
+      "name": "task2",
+      "completed": false,
+      "completedAt": null
+    },
+    {
+      "id": "9e2d",
+      "name": "Passear com cachorro",
+      "completed": true,
+      "completedAt": "2025-02-03T00:00:48.051Z"
+    }
+  ]
+}
