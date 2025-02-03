@@ -1,4 +1,4 @@
-import  { useReducer, useEffect } from 'react';
+import { useReducer, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import api from './api';
 import Header from './components/Header/Header';
@@ -18,36 +18,41 @@ function App() {
   const [state, dispatch] = useReducer(taskReducer, initialState);
 
   useEffect(() => {
-    api.get('/tasks')
-      .then(response => {
+    const fetchTasks = async () => {
+      try {
+        const response = await api.get('/tasks');
         dispatch({ type: 'SET_TASKS', payload: response.data });
-      })
-      .catch(error => {
-        console.error('Error fetching tasks:', error);
-      });
+      } catch (error) {
+        console.error('Erro ao buscar tarefas:', error);
+      }
+    };
+
+    fetchTasks();
   }, []);
 
-  const addTask = (taskName: string) => {
-    api.post('/tasks', { name: taskName, completed: false, completedAt: null })
-      .then(response => {
-        dispatch({ type: 'ADD_TASK', payload: response.data });
-      })
-      .catch(error => {
-        console.error('Error adding task:', error);
-      });
+  useEffect(() => {
+    console.log("Tarefas atualizadas:", state.tasks);
+  }, [state.tasks]);
+
+  const addTask = async (taskName: string) => {
+    try {
+      const response = await api.post('/tasks', { name: taskName, completed: false, completedAt: null });
+      dispatch({ type: 'ADD_TASK', payload: response.data });
+    } catch (error) {
+      console.error('Erro ao adicionar tarefa:', error);
+    }
   };
 
-  const removeTask = (taskId: number) => {
-    api.delete(`/tasks/${taskId}`)
-      .then(() => {
-        dispatch({ type: 'REMOVE_TASK', payload: taskId });
-      })
-      .catch(error => {
-        console.error('Error removing task:', error);
-      });
+  const removeTask = async (taskId: number) => {
+    try {
+      await api.delete(`/tasks/${taskId}`);
+      dispatch({ type: 'REMOVE_TASK', payload: taskId });
+    } catch (error) {
+      console.error('Erro ao remover tarefa:', error);
+    }
   };
 
-  const toggleTask = (taskId: number) => {
+  const toggleTask = async (taskId: number) => {
     const task = state.tasks.find((task: Task) => task.id === taskId);
     if (task) {
       const updatedTask: Task = {
@@ -55,13 +60,13 @@ function App() {
         completed: !task.completed,
         completedAt: !task.completed ? new Date() : null
       };
-      api.put(`/tasks/${taskId}`, updatedTask)
-        .then(() => {
-          dispatch({ type: 'TOGGLE_TASK', payload: updatedTask });
-        })
-        .catch(error => {
-          console.error('Error toggling task:', error);
-        });
+
+      try {
+        await api.put(`/tasks/${taskId}`, updatedTask);
+        dispatch({ type: 'TOGGLE_TASK', payload: updatedTask });
+      } catch (error) {
+        console.error('Erro ao alternar estado da tarefa:', error);
+      }
     }
   };
 
@@ -75,7 +80,11 @@ function App() {
               <>
                 <h1>Pendências</h1>
                 <AddTask onAddTask={addTask} />
-                <TaskList tasks={state.tasks} onRemoveTask={removeTask} onToggleTask={toggleTask} />
+                {state.tasks.length > 0 ? (
+                  <TaskList tasks={state.tasks} onRemoveTask={removeTask} onToggleTask={toggleTask} />
+                ) : (
+                  <p>Nenhuma tarefa adicionada.</p>
+                )}
               </>
             } />
             <Route path="/completed" element={<CompletedTasks tasks={state.tasks} />} />
