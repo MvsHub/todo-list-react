@@ -13,20 +13,17 @@ body {
 
 .container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column; /* Empilha os elementos */
   align-items: center;
-  justify-content: space-between;
   gap: 10px;
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
-  overflow: visible; /* Evita que o botão suma */
 }
 
 /* Input de Tarefa */
 .input-tarefa {
-  flex: 1;
-  min-width: 200px;
+  width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -41,11 +38,10 @@ body {
   border-radius: 5px;
   cursor: pointer;
   white-space: nowrap;
-  display: inline-block;
-  visibility: visible;
-  opacity: 1;
-  position: relative;
-  z-index: 1000; /* Eleva o botão acima de outros elementos */
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+  display: block;
 }
 
 .btn-adicionar:hover {
@@ -55,8 +51,7 @@ body {
 /* Ajuste para telas menores */
 @media (max-width: 600px) {
   .container {
-    flex-direction: column;
-    align-items: center;
+    width: 90%; /* Ajusta a largura no mobile */
   }
 
   .input-tarefa {
@@ -65,8 +60,6 @@ body {
 
   .btn-adicionar {
     width: 100%;
-    margin-top: 10px; /* Garante separação do input */
-    display: block;
-    text-align: center;
+    margin-top: 10px;
   }
 }
