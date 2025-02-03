@@ -22,6 +22,7 @@ body {
   margin: 0 auto; /* Centraliza na tela */
 }
 
+/* Input de Tarefa */
 .input-tarefa {
   flex: 1; /* Ocupa o máximo de espaço possível */
   min-width: 200px;
@@ -30,6 +31,7 @@ body {
   border-radius: 5px;
 }
 
+/* Botão Adicionar */
 .btn-adicionar {
   padding: 10px 15px;
   background-color: #007bff;
@@ -38,6 +40,9 @@ body {
   border-radius: 5px;
   cursor: pointer;
   white-space: nowrap; /* Evita que o texto quebre */
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .btn-adicionar:hover {
@@ -48,11 +53,15 @@ body {
 @media (max-width: 600px) {
   .container {
     flex-direction: column; /* Empilha o input e o botão no mobile */
-    align-items: stretch;
+    align-items: center;
   }
 
-  .input-tarefa,
+  .input-tarefa {
+    width: 100%;
+  }
+
   .btn-adicionar {
     width: 100%; /* Ambos ocupam toda a largura */
+    margin-top: 10px; /* Adiciona espaço entre input e botão */
   }
 }
