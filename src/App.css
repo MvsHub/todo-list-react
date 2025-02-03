@@ -18,13 +18,14 @@ body {
   justify-content: space-between;
   gap: 10px;
   width: 100%;
-  max-width: 600px; /* Define um limite para o tamanho do input */
-  margin: 0 auto; /* Centraliza na tela */
+  max-width: 600px;
+  margin: 0 auto;
+  overflow: visible; /* Evita que o botão suma */
 }
 
 /* Input de Tarefa */
 .input-tarefa {
-  flex: 1; /* Ocupa o máximo de espaço possível */
+  flex: 1;
   min-width: 200px;
   padding: 10px;
   border: 1px solid #ccc;
@@ -39,10 +40,12 @@ body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  white-space: nowrap; /* Evita que o texto quebre */
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+  white-space: nowrap;
+  display: inline-block;
+  visibility: visible;
+  opacity: 1;
+  position: relative;
+  z-index: 1000; /* Eleva o botão acima de outros elementos */
 }
 
 .btn-adicionar:hover {
@@ -52,7 +55,7 @@ body {
 /* Ajuste para telas menores */
 @media (max-width: 600px) {
   .container {
-    flex-direction: column; /* Empilha o input e o botão no mobile */
+    flex-direction: column;
     align-items: center;
   }
 
@@ -61,7 +64,9 @@ body {
   }
 
   .btn-adicionar {
-    width: 100%; /* Ambos ocupam toda a largura */
-    margin-top: 10px; /* Adiciona espaço entre input e botão */
+    width: 100%;
+    margin-top: 10px; /* Garante separação do input */
+    display: block;
+    text-align: center;
   }
 }
