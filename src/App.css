@@ -10,3 +10,49 @@ body {
     padding: 10px 0;
   }
 }
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  max-width: 600px; /* Define um limite para o tamanho do input */
+  margin: 0 auto; /* Centraliza na tela */
+}
+
+.input-tarefa {
+  flex: 1; /* Ocupa o máximo de espaço possível */
+  min-width: 200px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.btn-adicionar {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap; /* Evita que o texto quebre */
+}
+
+.btn-adicionar:hover {
+  background-color: #0056b3;
+}
+
+/* Ajuste para telas menores */
+@media (max-width: 600px) {
+  .container {
+    flex-direction: column; /* Empilha o input e o botão no mobile */
+    align-items: stretch;
+  }
+
+  .input-tarefa,
+  .btn-adicionar {
+    width: 100%; /* Ambos ocupam toda a largura */
+  }
+}
