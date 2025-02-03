@@ -63,3 +63,65 @@ body {
     margin-top: 10px;
   }
 }
+
+/* ========================= */
+/* 🔹 Ajustes para exibição da Lista de Tarefas no Mobile */
+/* ========================= */
+
+/* Certifica que a lista de tarefas nunca fica invisível */
+.no-tasks {
+  text-align: center;
+  font-size: 16px;
+  color: #ccc;
+  margin-top: 15px;
+}
+
+/* Garante que a lista não suma no mobile */
+.task-list {
+  display: block !important;
+  width: 100%;
+  padding: 0;
+  margin-top: 10px;
+}
+
+/* Garante que os itens da lista sejam visíveis e bem espaçados */
+.task-list li {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 5px;
+  background-color: #1e1e1e;
+  color: white;
+  border-radius: 4px;
+}
+
+/* Ajuste do botão "Remover" para telas menores */
+.task-list button {
+  padding: 5px 10px;
+  background-color: #ed145b;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.task-list button:hover {
+  background-color: #c10e49;
+}
+
+/* Ajuste de responsividade da lista */
+@media (max-width: 600px) {
+  .task-list {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .task-list li {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

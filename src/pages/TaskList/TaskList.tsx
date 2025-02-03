@@ -63,21 +63,26 @@ const Button = styled.button`
 
 const TaskList: React.FC<TaskListProps> = ({ tasks, onRemoveTask, onToggleTask }) => {
   return (
-    <List>
-      {tasks.map((task) => (
-        <ListItem key={task.id} completed={task.completed}>
-          <TaskInfo>
-            <Checkbox
-              type="checkbox"
-              checked={task.completed}
-              onChange={() => onToggleTask(task.id)}
-            />
-            <span>{task.name}</span>
-          </TaskInfo>
-          <Button onClick={() => onRemoveTask(task.id)}>Remover</Button>
-        </ListItem>
-      ))}
-    </List>
+<List>
+  {tasks.length === 0 ? (
+    <p className="no-tasks">Nenhuma tarefa adicionada.</p>
+  ) : (
+    tasks.map((task) => (
+      <ListItem key={task.id} completed={task.completed}>
+        <TaskInfo>
+          <Checkbox
+            type="checkbox"
+            checked={task.completed}
+            onChange={() => onToggleTask(task.id)}
+          />
+          <span>{task.name}</span>
+        </TaskInfo>
+        <Button onClick={() => onRemoveTask(task.id)}>Remover</Button>
+      </ListItem>
+    ))
+  )}
+</List>
+
   );
 };
 
